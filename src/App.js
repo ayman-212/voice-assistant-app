@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 import NewsCards from './Components/NewsCards/NewsCards';
+import IntroCards from './Components/InfoCards/InfoCards';
 
 const App = () => {
-    const [newsArticles, setNewsArticles] = useState([]);
+    const [newsArticles, setNewsArticles] = useState(null);
 
     useEffect(() => {
         alanBtn({
@@ -17,10 +18,15 @@ const App = () => {
             }
         });
     }, []);
+
     return (
         <div >
             <h1>Alan AI news application</h1>
-            <NewsCards articles={newsArticles} />
+            {newsArticles ?
+                <NewsCards articles={newsArticles} />
+                :
+                <IntroCards />
+            }
         </div>
     );
 }
